@@ -2,8 +2,8 @@ from datetime import datetime
 import json
 from passlib.context import CryptContext
 from sqlmodel import Session
-from db import engine
-from models import User, Movie, Swipe, WatchlistItem
+from app.db import engine
+from app.models import User, Movie, Swipe, WatchlistItem
 
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
