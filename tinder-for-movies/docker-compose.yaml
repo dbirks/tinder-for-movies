@@ -18,7 +18,7 @@ services:
       context: ./ui
       dockerfile: Dockerfile
     ports:
-      - "5173:80" # Vite dev port mapped to host 5173, Nginx in container serves on 80
+      - "5173:5173" # Vite dev server port
     volumes:
       - ./ui/src:/app/src # For development: hot-reloading for React code
     depends_on:

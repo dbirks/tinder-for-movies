@@ -1,16 +1,18 @@
-# Stage 1: Build
-FROM node:20-alpine as builder
+# Use Node.js Alpine image
+FROM node:20-alpine
+
 WORKDIR /app
+
+# Copy package files
 COPY package.json tsconfig.json tsconfig.node.json vite.config.ts ./
 COPY ./src ./src
 COPY ./index.html ./
-RUN npm install --frozen-lockfile || npm install
-RUN npm run build
 
-# Stage 2: Serve with nginx
-FROM nginx:alpine
-WORKDIR /usr/share/nginx/html
-COPY --from=builder /app/dist .
-COPY --from=builder /app/index.html ./index.html
-EXPOSE 80
-CMD ["nginx", "-g", "daemon off;"]
+# Install dependencies
+RUN npm install --frozen-lockfile || npm install
+
+# Expose Vite dev server port
+EXPOSE 5173
+
+# Start Vite dev server
+CMD ["npm", "run", "dev", "--", "--host", "0.0.0.0"]
