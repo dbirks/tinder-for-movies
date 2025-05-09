@@ -32,3 +32,4 @@ api_db_data/
 # Build artifacts
 build/
 *.local
+.venv
