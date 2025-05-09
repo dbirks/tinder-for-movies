@@ -7,7 +7,7 @@ WORKDIR /app
 RUN pip install uv
 
 # Copy dependency definition files
-COPY pyproject.toml poetry.lock* ./ 
+COPY pyproject.toml ./ 
 # If poetry.lock is present, uv will use it. Otherwise, it uses pyproject.toml.
 
 # Install dependencies using uv
@@ -41,7 +41,8 @@ COPY --from=builder /app/wait-for-it.sh /app/wait-for-it.sh
 ENV PATH="/opt/venv/bin:$PATH"
 ENV PYTHONPATH=/app
 ENV PYTHONUNBUFFERED=1
-ENV APP_MODULE="app.main:app" # Assuming your FastAPI app instance is 'app' in 'app/main.py'
+# Assuming your FastAPI app instance is 'app' in 'app/main.py'
+ENV APP_MODULE="app.main:app"
 ENV HOST="0.0.0.0"
 ENV PORT="8000"
 
