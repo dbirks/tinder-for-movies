@@ -1,10 +1,22 @@
+import React from 'react';
 import { Button } from "../components/ui/button";
 
-function App() {
+const App: React.FC = () => {
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-slate-50">
-      <h1 className="text-3xl font-bold mb-4">Hello, World! 👋</h1>
-      <Button>Shadcn Button</Button>
+    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', minHeight: '100vh', backgroundColor: '#f8fafc' }}>
+      <h1 style={{ fontSize: '2rem', fontWeight: 'bold', marginBottom: '1rem' }}>Hello, World! 👋</h1>
+      <button 
+        style={{ 
+          padding: '0.5rem 1rem', 
+          backgroundColor: '#3b82f6', 
+          color: 'white', 
+          border: 'none', 
+          borderRadius: '0.25rem',
+          cursor: 'pointer'
+        }}
+      >
+        Click Me
+      </button>
     </div>
   );
 }
