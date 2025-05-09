@@ -1,0 +1,36 @@
+version: '3.8'
+
+services:
+  api:
+    build:
+      context: ./api
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./api/app:/app/app  # For development: hot-reloading for Python code
+      - ./api_db_data:/app/data # Persistent SQLite data
+    env_file:
+      - ./api/.env.example # Example, create .env from this
+    networks:
+      - tinder-for-movies-net
+
+  ui:
+    build:
+      context: ./ui
+      dockerfile: Dockerfile
+    ports:
+      - "5173:80" # Vite dev port mapped to host 5173, Nginx in container serves on 80
+    volumes:
+      - ./ui/src:/app/src # For development: hot-reloading for React code
+    depends_on:
+      - api
+    networks:
+      - tinder-for-movies-net
+
+networks:
+  tinder-for-movies-net:
+    driver: bridge
+
+volumes:
+  api_db_data: # Named volume for SQLite persistence

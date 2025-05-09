@@ -1,0 +1,39 @@
+[project]
+name = "tinder-for-movies-api"
+version = "0.1.0"
+description = "API for Tinder for Movies"
+authors = [{ name = "Your Name", email = "you@example.com" }]
+dependencies = [
+    "fastapi>=0.110.0",
+    "uvicorn[standard]>=0.29.0",
+    "sqlalchemy>=2.0.29",
+    "alembic>=1.13.1", # For database migrations
+    "python-dotenv>=1.0.1",
+    "pydantic>=2.5.0", # pydantic for data validation
+    "pydantic-settings>=2.2.1"
+]
+requires-python = ">=3.13"
+
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+# If you want to use uv as your project manager locally (optional, as Docker handles it)
+# [tool.uv]
+# default-uv-args = "--python=3.13"
+
+[tool.ruff]
+line-length = 88
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "UP", "PL", "RUF"]
+ignore = ["E501"] # Handled by formatter
+
+[tool.ruff.format]
+quote-style = "double"
+
+[tool.mypy]
+python_version = "3.13"
+warn_return_any = true
+warn_unused_configs = true
+ignore_missing_imports = true # Start with true, can be set to false for stricter checks later
