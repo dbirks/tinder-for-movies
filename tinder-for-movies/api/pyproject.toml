@@ -3,7 +3,7 @@ name = "tinder-for-movies-api"
 version = "0.1.0"
 description = "Backend API for Tinder for Movies application"
 authors = [{ name = "Your Name", email = "you@example.com" }]
-requires-python = ">=3.11,<3.12"
+requires-python = ">=3.12"
 dependencies = [
     "fastapi>=0.104.0",
     "uvicorn>=0.24.0",
@@ -20,29 +20,8 @@ dependencies = [
 requires = ["hatchling"]
 build-backend = "hatchling.build"
 
-# If you want to use uv as your project manager locally (optional, as Docker handles it)
-# [tool.uv]
-# default-uv-args = "--python=3.13"
-
 [tool.hatch.build.targets.wheel]
 packages = ["app"]
 
 [tool.ruff]
-line-length = 88
-target-version = "py311"
-
-[tool.ruff.lint]
-select = ["E", "F", "B", "I"]
-ignore = []
-
-[tool.ruff.format]
-quote-style = "double"
-indent-style = "space"
-skip-magic-trailing-comma = false
-line-ending = "auto"
-
-[tool.mypy]
-python_version = "3.13"
-warn_return_any = true
-warn_unused_configs = true
-ignore_missing_imports = true # Start with true, can be set to false for stricter checks later
+line-length = 120
