@@ -1,20 +1,19 @@
-import sqlite3
-from contextlib import contextmanager
+from sqlmodel import SQLModel, create_engine, Session
 import os
+from contextlib import contextmanager
 
 DB_PATH = os.getenv("DATABASE_URL", "sqlite:///./data/app.db")
 
-# Extract file path from DATABASE_URL if needed
-def get_db_file_path():
-    if DB_PATH.startswith("sqlite:///"):
-        return DB_PATH.replace("sqlite:///", "")
-    return DB_PATH
+# Create engine
+engine = create_engine(DB_PATH, echo=True)
+
+def create_db_and_tables():
+    SQLModel.metadata.create_all(engine)
 
 @contextmanager
-def get_db():
-    db_path = get_db_file_path()
-    conn = sqlite3.connect(db_path)
+def get_session():
+    session = Session(engine)
     try:
-        yield conn
+        yield session
     finally:
-        conn.close()
+        session.close()
